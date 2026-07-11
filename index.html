@@ -3,162 +3,107 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Growth With India (GWI) - Registration</title>
+    <title>Growth With India - Registration</title>
     <style>
         body {
-            background-color: #0b0c10;
+            background-color: #0b0f19;
             color: #ffffff;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            margin: 0;
-            padding: 0;
+            font-family: Arial, sans-serif;
             display: flex;
             justify-content: center;
             align-items: center;
-            min-height: 100vh;
+            height: 100vh;
+            margin: 0;
         }
-        .container {
-            background-color: #1f2833;
-            border: 2px solid #c5a059;
-            border-radius: 10px;
+        .registration-card {
+            background-color: #131926;
+            border: 1px solid #242f47;
+            border-radius: 8px;
             padding: 30px;
             width: 90%;
-            max-width: 400px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+            max-width: 360px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
             text-align: center;
-            box-sizing: border-box;
         }
         h2 {
-            color: #c5a059;
+            color: #d4af37; /* Gold color like your screenshot */
             margin-bottom: 25px;
+            font-size: 24px;
         }
         .input-group {
             margin-bottom: 15px;
-            text-align: left;
         }
-        input, select {
+        input {
             width: 100%;
             padding: 12px;
-            background-color: #0b0c10;
-            border: 1px solid #45f3ff;
-            border-radius: 5px;
-            color: white;
+            background-color: #0d121d;
+            border: 1px solid #1f2a3f;
+            border-radius: 4px;
+            color: #fff;
             font-size: 16px;
             box-sizing: border-box;
         }
-        input:focus, select:focus {
-            border-color: #c5a059;
-            outline: none;
+        input::placeholder {
+            color: #566785;
         }
-        .btn {
+        .btn-submit {
             width: 100%;
             padding: 12px;
-            background-color: #c5a059;
+            background-color: #d4af37;
             border: none;
-            border-radius: 5px;
-            color: #0b0c10;
-            font-size: 18px;
+            border-radius: 4px;
+            color: #0b0f19;
+            font-size: 16px;
             font-weight: bold;
             cursor: pointer;
-            margin-top: 15px;
-            transition: 0.3s;
+            margin-top: 10px;
+            transition: background 0.3s;
         }
-        .btn:hover {
-            background-color: #e5c07b;
-        }
-        .footer-text {
-            margin-top: 20px;
-            font-size: 14px;
-            color: #c5a059;
-        }
-        .footer-text a {
-            color: #45f3ff;
-            text-decoration: none;
+        .btn-submit:hover {
+            background-color: #bfa030;
         }
     </style>
 </head>
 <body>
 
-<div class="container">
+<div class="registration-card">
     <h2>GWI Registration</h2>
-    <form id="registrationForm">
+    
+    <form id="regForm">
         <div class="input-group">
             <input type="text" id="sponsorId" placeholder="Sponsor ID Dalein (Optional)">
         </div>
         <div class="input-group">
-            <input type="text" id="fullName" placeholder="Full Name" required>
+            <input type="text" id="fullName" placeholder="Kuldeep singh" required>
         </div>
         <div class="input-group">
-            <input type="tel" id="mobileNumber" placeholder="Mobile Number" required>
+            <input type="tel" id="mobileNumber" placeholder="8233781854" required>
         </div>
-        <div class="input-group">
-            <input type="email" id="email" placeholder="Email Address" required>
-        </div>
-        <div class="input-group">
-            <input type="password" id="password" placeholder="Password" required>
-        </div>
-        <div class="input-group">
-            <input type="text" id="state" placeholder="State" required>
-        </div>
-        <div class="input-group">
-            <input type="text" id="country" placeholder="Country" value="India" required>
-        </div>
-        <button type="submit" class="btn">Register</button>
+        
+        <button type="submit" class="btn-submit">SUBMIT</button>
     </form>
-    <div class="footer-text">
-        Pehle se account hai? <a href="login.html">Login Karein</a>
-    </div>
 </div>
 
-<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
-<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
-<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
-
 <script>
-    const firebaseConfig = {
-        apiKey: "AIzaSyA9qM230tbZ6XnqTALcgQG1mW-S-iO9oOQ",
-        authDomain: "gwi-project-ae566.firebaseapp.com",
-        projectId: "gwi-project-ae566",
-        storageBucket: "gwi-project-ae566.appspot.com",
-        messagingSenderId: "367280927891",
-        appId: "1:367280927891:web:5d2ab00c5980757d24ab24"
-    };
-
-    firebase.initializeApp(firebaseConfig);
-    const auth = firebase.auth();
-    const db = firebase.firestore();
-
-    document.getElementById('registrationForm').addEventListener('submit', function(e) {
+    document.getElementById('regForm').addEventListener('submit', function(e) {
         e.preventDefault();
         
-        const email = document.getElementById('email').value;
-        const password = document.getElementById('password').value;
-        const fullName = document.getElementById('fullName').value;
+        // यहाँ आप अपना डेटा संभाल सकते हैं
+        const name = document.getElementById('fullName').value;
         const mobile = document.getElementById('mobileNumber').value;
-        const sponsorId = document.getElementById('sponsorId').value;
-        const state = document.getElementById('state').value;
-        const country = document.getElementById('country').value;
+        const sponsor = document.getElementById('sponsorId').value;
 
-        auth.createUserWithEmailAndPassword(email, password)
-            .then((userCredential) => {
-                const user = userCredential.user;
-                return db.collection("users").doc(user.uid).set({
-                    uid: user.uid,
-                    fullName: fullName,
-                    mobile: mobile,
-                    email: email,
-                    sponsorId: sponsorId,
-                    state: state,
-                    country: country,
-                    createdAt: firebase.firestore.FieldValue.serverTimestamp()
-                });
-            })
-            .then(() => {
-                alert("Registration Successful!");
-                window.location.href = "dashboard.html"; 
-            })
-            .catch((error) => {
-                alert("Error: " + error.message);
-            });
+        // नोट: यदि आप Firebase इस्तेमाल कर रहे हैं, तो नीचे अपनी सही API Key डालें
+        alert("रजिस्ट्रेशन डेटा सबमिट किया जा रहा है: " + name);
+        
+        /* 
+        अगर आपको Google/Firebase से जोड़ना है तो यहाँ सही API Key वाला कोड आएगा:
+        
+        const firebaseConfig = {
+            apiKey: "यहाँ_अपनी_सही_API_KEY_डालें",
+            authDomain: "your-app.firebaseapp.com"
+        };
+        */
     });
 </script>
 
